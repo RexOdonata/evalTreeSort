@@ -2,34 +2,14 @@
 //
 
 #include <iostream>
+#include <stdlib.h>
 
 #include "handler.h"
 
-int main()
+int main(int argc, char * argv[])
 {
 
-    /*
-    int size = 1000;
-
-    int * data = new int[size];
-
-
-    for (int i = 0; i < size; i++) data[i] = i + 1;
-
-    evalTree testBed(data, size);
-
-    //testBed.printTree();
-
-    printf("\n");
-
-    for (int i = 0; i < size; i++)
-    {
-        printf("(%d) ",testBed.takeRoot(i+1));
-        //testBed.printTree();
-    }
-    */
-
-    handler testBed(10000000,false,10);
+    handler testBed(atoi(argv[1]),false,atoi(argv[2]));
     testBed.randExperiment();
 
 }

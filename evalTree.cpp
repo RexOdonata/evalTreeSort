@@ -52,8 +52,47 @@ evalTree::~evalTree()
 
 void evalTree::updateNode(int index)
 {
-	//printf("Update Call from %d\n", index);
-	if (leftOpen == false && rightOpen == false)
+
+	if (leftOpen)
+	{
+		if (rightOpen)
+		{
+			//evaluate both children
+			if (leftKey < rightKey)
+			{
+				tree[index].val = leftVal;
+			}
+			else
+			{
+				tree[index].val = rightVal;
+			}
+		}
+		else
+		{
+			//take left
+			tree[index].val = leftVal;
+		}
+
+		//bubble eval up
+		if (index > 0) updateNode((index - 1) / 2);
+	}
+	else
+	{
+		if (rightOpen)
+		{
+			//take right
+			tree[index].val = rightVal;
+			if (index > 0) updateNode((index - 1) / 2);
+		}
+		else
+		{
+			//if both children are closed, this node closes and bubbles the eval up
+			closeNode(index);
+		}
+	}
+
+	/*
+	if (leftOpen == false )
 	{
 		closeNode(index);
 	}
@@ -81,6 +120,7 @@ void evalTree::updateNode(int index)
 		tree[index].val = rightVal;
 		if (index > 0) updateNode((index - 1) / 2);
 	}
+	*/
 
 	
 
@@ -88,30 +128,14 @@ void evalTree::updateNode(int index)
 
 void evalTree::updateNodeInit(int index)
 {
-
-	if (leftOpen)
+	if (leftKey < rightKey)
 	{
-		if (rightOpen)
-		{
-			if (leftKey < rightKey)
-			{
-				tree[index].val = leftVal;
-			}
-			else
-			{
-				tree[index].val = rightVal;
-			}
-		}
-		else
-		{
-			tree[index].val = leftVal;
-		}
+		tree[index].val = leftVal;
 	}
 	else
 	{
 		tree[index].val = rightVal;
 	}
-
 }
 
 void evalTree::printTree()
