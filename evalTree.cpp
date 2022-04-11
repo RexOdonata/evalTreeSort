@@ -18,6 +18,8 @@ evalTree::evalTree(int* unsortedData, int setSize)
 
 	tree = new node[totalTreeSize];
 
+	//testing out source tree
+
 	for (int i = totalTreeSize - 1; i >= 0; i--)
 	{
 		if (i >= dataNodes-1)
